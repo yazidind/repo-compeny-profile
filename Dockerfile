@@ -1,9 +1,10 @@
 FROM php:8.2-apache
 
-# Install dependencies
+# Install dependencies + ext-intl
 RUN apt-get update && apt-get install -y \
     libzip-dev unzip zip git curl libpng-dev libonig-dev libxml2-dev \
-    && docker-php-ext-install zip pdo pdo_mysql mbstring gd
+    libicu-dev \
+    && docker-php-ext-install zip pdo pdo_mysql mbstring gd intl
 
 # Enable Apache Rewrite Module
 RUN a2enmod rewrite
