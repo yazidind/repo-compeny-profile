@@ -1,30 +1,28 @@
 FROM php:8.2-apache
 
-# Install ekstensi PHP yang dibutuhkan CI4
+# Install dependencies
 RUN apt-get update && apt-get install -y \
-    libzip-dev unzip \
-    && docker-php-ext-install zip intl mbstring
+    libzip-dev unzip zip git curl libpng-dev libonig-dev libxml2-dev \
+    && docker-php-ext-install zip pdo pdo_mysql mbstring gd
 
-# Aktifkan mod_rewrite Apache
+# Enable Apache Rewrite Module
 RUN a2enmod rewrite
-
-# Copy semua file project ke container
-COPY . /var/www/html/
-
-# Set direktori kerja
-WORKDIR /var/www/html/
-
-# Ubah document root Apache ke folder public/
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
-
-# Update konfigurasi Apache agar root ke /public
-RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-RUN composer install --no-dev --optimize-autoloader
 
-# Atur hak akses ke folder writable
-RUN chown -R www-data:www-data writable
-RUN chmod -R 775 writable
+# Copy project files
+COPY . /var/www/html
+
+# Set permissions
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html/writable
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Run composer install
+RUN composer install
+
+# Expose port
+EXPOSE 80
