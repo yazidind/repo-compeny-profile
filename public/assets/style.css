@@ -1,0 +1,500 @@
+/* style.css */
+
+/* Reset dan Global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: #ffffff;
+  color: #333;
+  line-height: 1.6;
+  opacity: 0;
+  animation: fadeInPage 0.6s ease forwards;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+@keyframes fadeInPage {
+  to { opacity: 1; }
+}
+
+/* Header dan Navbar */
+header {
+  background-color: #2E7D32;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: background-color 0.4s ease;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  max-height: 60px;
+  object-fit: contain;
+  background-color: transparent;
+  border-radius: 0;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 1s ease;
+}
+
+.logo-img.loaded {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+  background-color: #2E7D32;
+  transition: background-color 0.4s ease;
+}
+
+.nav-links li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  display: inline-block;
+  transition: transform 0.3s ease, opacity 0.3s ease, color 0.2s ease;
+}
+
+.nav-links li a:hover {
+  transform: translateY(-3px);
+  opacity: 1;
+}
+
+.nav-links li a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: white;
+  transition: width 0.3s ease;
+}
+
+.nav-links li a:hover::after {
+  width: 100%;
+}
+
+.btn {
+  display: inline-block;
+  background-color: #2E7D32;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #1b5e20;
+  box-shadow: 0 0 10px 2px rgba(46, 125, 50, 0.6);
+}
+
+.hero {
+  position: relative;
+  background: url('lyout/bg1.jpg') no-repeat center center/cover;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  background-attachment: fixed;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+}
+
+.hero-text h1,
+.hero-text p {
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.section {
+  padding: 4rem 2rem;
+  text-align: center;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.section.light {
+  background-color: #f5f5f5;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #2E7D32;
+  transition: color 0.4s ease;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 1rem;
+  text-align: center;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.card img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+/* Reveal Animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Dark Mode */
+body.dark {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+body.dark header,
+body.dark footer,
+body.dark .nav-links {
+  background-color: #1e1e1e;
+}
+
+body.dark .section.light {
+  background-color: #1a1a1a;
+}
+
+body.dark .card,
+body.dark .kontak-form input,
+body.dark .kontak-form textarea {
+  background-color: #222;
+  color: white;
+  border-color: #444;
+}
+
+body.dark .btn {
+  background-color: #43a047;
+}
+
+body.dark .btn:hover {
+  background-color: #66bb6a;
+}
+
+body.dark .nav-links a {
+  color: #ddd;
+}
+
+body.dark .nav-links a:hover::after {
+  background-color: #ccc;
+}
+
+.menu-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.4s ease, transform 0.3s ease;
+}
+
+#darkModeToggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+  transition: color 0.3s ease, transform 0.3s ease;
+  margin-right: 10px;
+}
+
+#darkModeToggle svg {
+  transition: transform 0.3s ease, fill 0.3s ease;
+}
+
+#darkModeToggle:hover svg {
+  transform: rotate(180deg);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    flex-direction: column;
+    width: 200px;
+    padding: 1rem;
+    display: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 999;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.4s ease, transform 0.4s ease, background-color 0.4s ease;
+  }
+
+  .nav-links.active {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .nav-links li {
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: none;
+  }
+
+  .nav-links.active li {
+    animation: slideDown 0.4s ease forwards;
+  }
+
+  .nav-links.active li:nth-child(1) { animation-delay: 0.05s; }
+  .nav-links.active li:nth-child(2) { animation-delay: 0.1s; }
+  .nav-links.active li:nth-child(3) { animation-delay: 0.15s; }
+  .nav-links.active li:nth-child(4) { animation-delay: 0.2s; }
+  .nav-links.active li:nth-child(5) { animation-delay: 0.25s; }
+  .nav-links.active li:nth-child(6) { animation-delay: 0.3s; }
+
+  @keyframes slideDown {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .kontak-form {
+    width: 90%;
+  }
+}
+
+#backToTop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 9999;
+  background-color: #2E7D32;
+  color: white;
+  border: none;
+  padding: 0.7rem 1rem;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Saat aktif tampil */
+#backToTop.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* Responsive fallback jika perlu */
+@media (max-width: 600px) {
+  #backToTop {
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+footer {
+  background-color: #2E7D32;
+  color: #fff;
+  padding: 1rem 0.5rem; /* <-- KECILKAN padding */
+  text-align: center;
+  font-size: 0.85rem; /* <-- KECILKAN font */
+  line-height: 1.4; /* <-- Biar lebih rapat */
+  transition: background-color 0.4s ease;
+}
+
+footer .footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+footer .footer-links {
+  gap: 1rem; /* Sedikit kurangi jaraknya */
+  margin-top: 0.5rem;
+  font-size: 0.85rem; /* Tambahan, kecilkan ukuran link */
+}
+
+footer .footer-links a {
+  color: #c8e6c9;
+  text-decoration: none;
+  transition: color 0.3s;
+  font-weight: 500;
+}
+
+footer .footer-links a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+footer .copyright {
+  margin-top: 1rem;
+  font-size: 0.75rem; /* Lebih kecil dari teks biasa */
+}
+
+body.dark footer {
+  background-color: #1e1e1e;
+}
+
+body.dark footer .footer-links a {
+  color: #81c784;
+}
+
+body.dark footer .footer-links a:hover {
+  color: #fff;
+}
+
+.kontak-section {
+  padding: 4rem 2rem;
+  background-color: #f5f5f5;
+  text-align: center;
+}
+
+.kontak-form {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.kontak-form h2 {
+  margin-bottom: 1rem;
+  color: #2E7D32;
+}
+
+.kontak-form input,
+.kontak-form textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.kontak-form input:focus,
+.kontak-form textarea:focus {
+  border-color: #2E7D32;
+  outline: none;
+}
+
+.kontak-form button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #2E7D32;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.kontak-form button:hover {
+  background-color: #1b5e20;
+  transform: scale(1.03);
+}
+
+/* Dark Mode Styling */
+body.dark .kontak-section {
+  background-color: #1a1a1a;
+}
+
+body.dark .kontak-form {
+  background-color: #222;
+  color: #fff;
+}
+
+body.dark .kontak-form input,
+body.dark .kontak-form textarea {
+  background-color: #333;
+  color: #fff;
+  border-color: #555;
+}
+
+body.dark .kontak-form input:focus,
+body.dark .kontak-form textarea:focus {
+  border-color: #66bb6a;
+}
